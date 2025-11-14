@@ -65,11 +65,11 @@ int main(){
 
         // end of each time period print out what the toll looks like
         cout << "Queue: " << endl;
-        for(auto car : toll){
-            if(toll.empty()){
-                cout << "\tEmpty" << endl;
-            }
-            else{
+        if(toll.empty()){
+            cout << "\tEmpty" << endl;
+        }
+        else{
+            for(auto car : toll){
                 cout << "\t";
                 car.print();
             }
