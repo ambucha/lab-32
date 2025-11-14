@@ -63,7 +63,7 @@ int main(){
             toll.pop_front();
         }
 
-        // end of each time period print out what the toll looks like
+        // end of each time period print out what the toll looks like 
         cout << "Queue: " << endl;
         if(toll.empty()){
             cout << "\tEmpty" << endl;
