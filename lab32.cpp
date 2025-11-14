@@ -26,25 +26,53 @@ int main(){
     // variable for if the car pays or if a car joins
     int chance;
 
+    // print out the initial toll
+    cout << "Initial queue:" << endl;
+    for (auto car : toll){
+        cout << "\t";
+        car.print();
+    }
+
+    // variable to keep the time count
+    int time = 0;
+
     // create a while loop to run until there are no cars at the toll booth
-    while(toll.size() != 0){
+    while(!toll.empty()){
         // create a percentage chance for this time period
         chance = rand() % (MAX - MIN + 1) + MIN;
+
+        // count up the time
+        time++;
+        cout << "Time: " << time << " Operation: ";
 
         // 45% chance its a new car joining
         if(chance > CHANCE){
             // create a Car var and then push it back in the queue
             Car newCar;
             toll.push_back(newCar);
+
+            // print out that a car joined the lane then peek at the back to see which car joined
+            cout << "Joined lane: ";
+            toll.back().print();
         }
         // 55% chance the car at the front pays
         else{
+            // first print out what car is payign before popping it out
+            cout << "Car paid: ";
+            toll.front().print();
             toll.pop_front();
         }
 
         // end of each time period print out what the toll looks like
+        cout << "Queue: " << endl;
         for(auto car : toll){
-            car.print();
+            if(toll.empty()){
+                cout << "\tEmpty" << endl;
+            }
+            else{
+                cout << "\t";
+                car.print();
+            }
         }
     }
 
