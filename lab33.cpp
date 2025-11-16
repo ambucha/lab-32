@@ -36,6 +36,13 @@ int main(){
         cout << "Lane " << i << " size: " << toll[i].size() << endl;
     }
 
+    // ok so we see there are two cars per lane
+    // lets check the initial state to see that cars are random
+    for(int i = 0; i < NUM_OF_LANES; i++){
+        cout << "\tLane " << i << ":" << endl;
+        cout << ""
+    }
+
     // variable to keep the time count
     int time = 0;
 
