@@ -30,17 +30,17 @@ int main(){
     // variable for if the car pays or if a car joins
     int chance;
 
-    // print out the initial toll
-    // lets do some testing to see if it works, first check how many cars per lane
-    for(int i = 0; i < NUM_OF_LANES; i++){
-        cout << "Lane " << i << " size: " << toll[i].size() << endl;
-    }
-
     // ok so we see there are two cars per lane
     // lets check the initial state to see that cars are random
-    for(int i = 0; i < NUM_OF_LANES; i++){
-        cout << "\tLane " << i << ":" << endl;
-        cout << ""
+    int lanes = 0;
+    cout << "Initial queue:" << endl;
+    for(auto& lane : toll){
+        lanes++;
+        cout << "Lane " << lanes << ":" << endl;
+        for(auto& car : lane){
+            cout << "\t";
+            car.print();
+        }
     }
 
     // variable to keep the time count
