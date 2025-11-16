@@ -49,7 +49,6 @@ int main(){
         // output what time period we are on
         lanes = 0;
         cout << "Time: " << i << endl;
-        i++; // increment it
 
         // we now want it to be 50 50 for this mielstone not the actual percentages yet so i need to change my consts firsy
         for(auto& lane : toll){
@@ -63,12 +62,33 @@ int main(){
                 lane.push_back(newCar);
                 
                 // print out the operation
-                cout << "Lane: " << lanes << "Joined: ";
+                cout << "Lane: " << lanes << " Joined: ";
                 lane.back().print();
             }
-            else if(chance < CHANCE || !lane)
-        }
 
+            // now check if probability is for the car to pay, and if there are cars in the lane to pay
+            else if(chance <= CHANCE && !lane.empty()){
+                cout << "Lane: " << lanes << " Paid: ";
+                lane.front().print();
+                lane.pop_front();
+            }
+
+            // if neither condition is met nothing happens in that toll in this time period
+            else{
+                cout << "Lane: " << lanes << "Nothing happened" << endl;
+            }
+        }
+        
+        lanes = 0;
+        // print out each lane queue
+        for(auto& lane : toll){
+        lanes++;
+        cout << "Lane " << lanes << " Queue:" << endl;
+            for(auto& car : lane){
+                cout << "\t";
+                car.print();
+            }
+        }
     }
 
     // create a while loop to run until there are no cars at the toll booth
