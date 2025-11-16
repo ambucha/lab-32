@@ -12,7 +12,9 @@ using namespace std;
 // since pays and joins add up to 100 (55% for pays 45% for joins) and there are only two i can just use the same variable and use greater than or less than for the probabilities
 const int STARTING_SIZE = 2;
 const int NUM_OF_LANES = 4;
-const int CHANCE = 50;
+const int PAY_CHANCE = 46;
+const int JOIN_CHANCE = 39;
+const int SHIFT_CHANCE = 15;
 const int MAX = 100;
 const int MIN = 1;
 const int TIME = 20;
