@@ -68,14 +68,14 @@ int main(){
                 lane.back().print();
             }
 
-            else if(chance < JOIN_CHANCE + SHIFT_CHANCE){
+            else if(chance < JOIN_CHANCE + SHIFT_CHANCE && !lane.empty()){
                 do{
                     laneChance = rand() % NUM_OF_LANES;
-                }while(laneChance + 1 != lanes);
+                }while(laneChance == lanes - 1);
                 cout << "Lane: " << lanes << " Switched: ";
                 lane.back().print();
                 // push_back the last car in the current lane inot th e new given labne, hopefully this way works
-                toll[laneChance + 1].push_back(lane.back());
+                toll[laneChance].push_back(lane.back());
 
                 // get rid of the car in the current line
                 lane.pop_back();
@@ -90,7 +90,7 @@ int main(){
 
             // if neither condition is met nothing happens in that toll in this time period
             else{
-                cout << "Lane: " << lanes << "Nothing happened" << endl;
+                cout << "Lane: " << lanes << " Nothing happened" << endl;
             }
         }
         
@@ -98,55 +98,20 @@ int main(){
         // print out each lane queue
         for(auto& lane : toll){
         lanes++;
-        cout << "Lane " << lanes << " Queue:" << endl;
+        cout << "Lane " << lanes << " Queue:";
+        // if queue is emptyy
+        if(lane.empty()){
+            cout << "empty" << endl;
+        }
+        else{
+            cout << endl;
             for(auto& car : lane){
                 cout << "\t";
                 car.print();
             }
         }
-    }
-
-    // create a while loop to run until there are no cars at the toll booth
-    /*
-    while(!toll.empty()){
-        // create a percentage chance for this time period
-        chance = rand() % (MAX - MIN + 1) + MIN;
-
-        // count up the time
-        time++;
-        cout << "Time: " << time << " Operation: ";
-
-        // 45% chance its a new car joining
-        if(chance > CHANCE){
-            // create a Car var and then push it back in the queue
-            Car newCar;
-            toll.push_back(newCar);
-
-            // print out that a car joined the lane then peek at the back to see which car joined
-            cout << "Joined lane: ";
-            toll.back().print();
-        }
-        // 55% chance the car at the front pays
-        else{
-            // first print out what car is payign before popping it out
-            cout << "Car paid: ";
-            toll.front().print();
-            toll.pop_front();
-        }
-
-        // end of each time period print out what the toll looks like 
-        cout << "Queue: " << endl;
-        if(toll.empty()){
-            cout << "\tEmpty" << endl;
-        }
-        else{
-            for(auto car : toll){
-                cout << "\t";
-                car.print();
-            }
         }
     }
-        */
 
     return 0;
 }
