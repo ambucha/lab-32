@@ -12,9 +12,10 @@ using namespace std;
 // since pays and joins add up to 100 (55% for pays 45% for joins) and there are only two i can just use the same variable and use greater than or less than for the probabilities
 const int STARTING_SIZE = 2;
 const int NUM_OF_LANES = 4;
-const int CHANCE = 55;
+const int CHANCE = 50;
 const int MAX = 100;
 const int MIN = 1;
+const int TIME = 20;
 
 
 int main(){
@@ -43,8 +44,32 @@ int main(){
         }
     }
 
-    // variable to keep the time count
-    int time = 0;
+    // loop for twenty time periods
+    for(int i = 1; i <= TIME; i++){
+        // output what time period we are on
+        lanes = 0;
+        cout << "Time: " << i << endl;
+        i++; // increment it
+
+        // we now want it to be 50 50 for this mielstone not the actual percentages yet so i need to change my consts firsy
+        for(auto& lane : toll){
+            // create a percentage chance for this time period, for this toll
+            chance = rand() % (MAX - MIN + 1) + MIN;
+            lanes++;
+
+            if(chance > CHANCE){
+                // create a Car var and then push it back in the queue
+                Car newCar;
+                lane.push_back(newCar);
+                
+                // print out the operation
+                cout << "Lane: " << lanes << "Joined: ";
+                lane.back().print();
+            }
+            else if(chance < CHANCE || !lane)
+        }
+
+    }
 
     // create a while loop to run until there are no cars at the toll booth
     /*
