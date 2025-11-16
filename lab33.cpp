@@ -16,7 +16,6 @@ const int PAY_CHANCE = 46;
 const int JOIN_CHANCE = 39;
 const int SHIFT_CHANCE = 15; 
 const int MAX = 100;
-const int MIN = 1;
 const int TIME = 20;
 
 
@@ -32,6 +31,7 @@ int main(){
 
     // variable for if the car pays or if a car joins
     int chance;
+    int laneChance;
 
     // ok so we see there are two cars per lane
     // lets check the initial state to see that cars are random
@@ -55,10 +55,10 @@ int main(){
         // we now want it to be 50 50 for this mielstone not the actual percentages yet so i need to change my consts firsy
         for(auto& lane : toll){
             // create a percentage chance for this time period, for this toll
-            chance = rand() % (MAX - MIN + 1) + MIN;
+            chance = rand() % MAX;
             lanes++;
 
-            if(chance > CHANCE){
+            if(chance < JOIN_CHANCE){
                 // create a Car var and then push it back in the queue
                 Car newCar;
                 lane.push_back(newCar);
@@ -68,8 +68,21 @@ int main(){
                 lane.back().print();
             }
 
+            else if(chance < JOIN_CHANCE + SHIFT_CHANCE){
+                do{
+                    laneChance = rand() % NUM_OF_LANES;
+                }while(laneChance + 1 != lanes);
+                cout << "Lane: " << lanes << " Switched: ";
+                lane.back().print();
+                // push_back the last car in the current lane inot th e new given labne, hopefully this way works
+                toll[laneChance + 1].push_back(lane.back());
+
+                // get rid of the car in the current line
+                lane.pop_back();
+            }
+
             // now check if probability is for the car to pay, and if there are cars in the lane to pay
-            else if(chance <= CHANCE && !lane.empty()){
+            else if(chance < JOIN_CHANCE + SHIFT_CHANCE + PAY_CHANCE && !lane.empty()){
                 cout << "Lane: " << lanes << " Paid: ";
                 lane.front().print();
                 lane.pop_front();
